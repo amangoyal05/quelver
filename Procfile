@@ -1,0 +1,1 @@
+web: gunicorn query1.wsgi

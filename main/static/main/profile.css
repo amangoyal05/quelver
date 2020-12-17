@@ -1,0 +1,24 @@
+.container {
+    position: relative;
+    text-align: center;
+    color: black;
+}
+
+.user{
+   padding-left: 7%;
+   font-size: larger;
+}
+
+
+@media(max-width:568px)
+{
+    .navbar-nav{display:none}
+}
+  
+@media(min-width:568px)
+{
+    .open-slide
+    {
+        display:none
+    }
+}

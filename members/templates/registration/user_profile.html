@@ -1,0 +1,80 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <!--Meta Tags-->
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        <title>{{ page_user }}</title>
+
+
+        <!--Stylesheet-->
+        <link rel="stylesheet" href="{% static 'main/profile.css' %}">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+        
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+
+
+    </head>
+    <body>
+        <div class="container">
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+                <a class="navbar-brand" href="{% url 'home' %}">Home</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="{% url 'queries' %}">Queries<span class="sr-only">(current)</span></a>
+                        </li>
+                        {% if user.is_authenticated %}
+                        <li class="nav-item active">
+                            <a class="nav-link" href="{% url 'edit_profile' %}">Edit Profile<span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'add_query' %}">Add Query</a>
+                        </li>
+                        <li class="nav-item">
+                        <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+                        </li>
+                        {% else %}
+                      <li class="nav-item">
+                        <a class="nav-link" href="{% url 'register' %}">Register</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" href="{% url 'login' %}">Login</a>
+                      </li>
+                      {% endif %}
+                    </ul>
+                </div>
+             </nav>
+        </div>
+        <h1 style="text-align: center;">User Profile</h1>
+        <hr>
+        <div class="user">
+            Username - {{ page_user }}</br>
+            Bio - {{ page_user.bio }}</br>
+            <hr>
+            Social Media Links:<br>
+            {% if page_user.github_url %}
+                <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" style="width: 1cm; height: 1cm;"><a href="{{ user.profile.github_url }}">Github</a></br>
+            {% endif %}
+            {% if page_user.instagram_url %}
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/Instagram_logo_2016.svg/1200px-Instagram_logo_2016.svg.png" style="width: 1cm; height: 1cm;"><a href="{{ user.profile.instagram_url }}">Instagram</a></br>
+            {% endif %}    
+            {% if page_user.facebook_url %}
+                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAAADhCAMAAAAJbSJIAAAAZlBMVEUAAAD///9HR0eTk5PNzc1MTEycnJz8/PxhYWH39/dPT0+Wlpbo6OixsbGHh4ciIiIRERE4ODinp6fe3t4/Pz+NjY0tLS3FxcXU1NRbW1vu7u7Q0NAgICBsbGx+fn6+vr6urq53d3c5lAfBAAADfklEQVR4nO3d61bqMBCG4WTbjfaYHihuK4je/02KoGJZlYSm2TOT9b3/wXkWNS3QFqUvKsoqM7WSWG2yqiwuQWrMyxvqMb1r8uJXYdpTT7dQfTotbKkHW7B2Qjhk1FMtWjZcCjtDPdPCmW4sTKgHClDyU9hRTxOk7iwcYttET5nhWxjXInMu+xLGtJsY156EKfUcAUuPwliOZKbqP4QF9RRBKw7CnHqIoOUHofx3E9dqtIp7Iz1spqqkHiFwpaqoRwhcpWI9nvkqU3Eekp4zSuaHTu4x923XT7uXu9XvtRvqET3K+qT7+YnSdGKXkYf9YMUd+0s96axMa3/tJAvXpTNPpHC7v8UnUFi5b58ihZvOThItfLu/GShL+Hq7T5bwcQ5QkLD+NwsoSHj7GiNMOPMVlCOc9z8oSLiaDRQifJgPFCK89UhNnPDZAyhCuPMBihA6vpmXK/RYR2UIa59lRoTQ8yUUIPQE8he+RC+cfcQtRbj2BbIX3kUv9N5IuQuN586Qv/DJG8hdmEcvnP/hxXfMvz90XWiGx2r3MN2W2nA9t4VmeKOec3a1E/CVekyPti7AO+opfdo4APfUQ3rlcFQq/PzlP3ah8JNfHYRr6hn9sguln/xqFz5Sj+iZXSj9ShC7UPhC4yAUvbtXEEIoIQgh5B+EEPIPQgj5ByGE/IMQQv5BKF9o/95CjjDR91NZhZOPGj0Dl+/xE6tlbhD+ryCEEEL6IIQQQvoghBBC+iCEEEL6IIQQQvoghBBC+iCEEEL64hd63Uboalyukm2fk4nsF8kWUw8bPQXvC6Maq1D6T2/Ef6YChBDyD0II+QchhPyDEEL+QQgh/yCEkH8QQsg/CCHkH4QQ8g9CCPkHIYT8gxBC/kEIIf8ghJB/EELIPwgh5B+EEPIPQgj5ByGE/IMQQv5BCCH/IISQfxBCyD8IIeQfhBDyL/7fkt20K0tPS/yZeoknYVytDPUIgTOKy22IQpWpinqEwFWqpB4hcKWS/hP0tgqlG+oZgtZoJX6ver38IIx7My0OQvE3RbtWrz+EKfUYAUuPQt1SzxGsVp+EbG6vuHSZ/hIOcR6cmuFbqDvqYYLU6bNQJ9TTBOjztrCfQt3FtqGaTo+FeohruckGfSmMa6fRnlk/hDqN5eimT/W0UOsil/9Oo8mLkWks/ECWVWZkfjxVm6wqi0vQO/enOVqJYzmLAAAAAElFTkSuQmCC" style="width: 1cm; height: 1cm;"><a href="{{ user.profile.facebook_url }}">Facebook</a></br>
+            {% endif %}
+            {% if page_user.twitter_url %}
+                <img src="https://logos-world.net/wp-content/uploads/2020/04/Twitter-Logo.png" style="width: 1cm; height: 1cm;"><a href="{{ user.profile.twitter_url }}">Twitter</a></br>
+            {% endif %}
+        </div>
+        
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    </body>
+</html>

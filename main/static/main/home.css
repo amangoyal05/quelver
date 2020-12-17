@@ -1,0 +1,25 @@
+.container {
+    position: relative;
+    text-align: center;
+    color: black;
+}
+
+.position{
+    position: absolute;
+    top: 20%;
+    left: 50%;
+}
+
+
+@media(max-width:568px)
+{
+    .navbar-nav{display:none}
+}
+  
+@media(min-width:568px)
+{
+    .open-slide
+    {
+        display:none
+    }
+}
