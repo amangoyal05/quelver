@@ -1,55 +1,18 @@
-{% load static %}
-<!DOCTYPE html>
-<html>
-    <head>
-        <!--Meta Tags-->
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        
-        <title>Delete Query</title>
-
-
-        <!--Stylesheet-->
-        <link rel="stylesheet" href="{% static 'main/home.css' %}">
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-
-        
-        <!-- Font Awesome -->
-        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
-    </head>
-    <body>
-        <div class="container">
-            <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-                <a class="navbar-brand" href="{% url 'home' %}">Home</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav">
-                        <li class="nav-item active">
-                            <a class="nav-link" href="{% url 'edit_profile' %}">Edit Profile <span class="sr-only">(current)</span></a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'add_query' %}">Add Query</a>
-                        </li>
-                    </ul>
-                </div>
-                </nav>
-            </div>
-
-            <div class="container">
-                 <h1>Delete Your Query</h1>
-                 <br>
-                 <h3>Delete: {{ post.title }}</h3>
-                 <hr>
-                 <div class="form-group">
-                    <form method="POST">
-                        {% csrf_token %}
-                        <strong>Are you sure? (This change can't be undone)</strong>
-                        <br>
-                        <button class="btn btn-warning">Delete</button>
-                    </form>
-                </div>
-            </div>
-    </body>
-</html>
+{% extends 'base.html' %}
+{% block title %}Delete Query{% endblock %}
+{% block content %}
+<div class="container">
+    <h1>Delete Your Query</h1>
+    <br>
+    <h3>Delete: {{ post.title }}</h3>
+    <hr>
+    <div class="form-group">
+        <form method="POST">
+            {% csrf_token %}
+            <strong>Are you sure? (This change can't be undone)</strong>
+            <br>
+            <button class="btn btn-warning">Delete</button>
+        /form>
+    </div>
+</div>
+{% endblock %}

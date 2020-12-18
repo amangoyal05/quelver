@@ -1,6 +1,5 @@
 from pathlib import Path
-import django_heroku
-import dj_database_url
+import os
 from decouple import config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -16,7 +15,7 @@ SECRET_KEY = 'ohatnpl(^_4#p=yc()*38vd+orz98+$n#%d1pvsq3o9)t*wl1i'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['quelver.herokuapp.com', '127.0.0.1']
+ALLOWED_HOSTS = ['quelvery.herokuapp.com','127.0.0.1']
 
 
 # Application definition
@@ -41,7 +40,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'query1.urls'
@@ -70,8 +68,12 @@ WSGI_APPLICATION = 'query1.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'QUELVER_TEST',
+        'USER': 'postgres',
+        'PASSWORD': 'suncross',
+        'HOST': 'localhost',
+        'PORT': '5432',
     }
 }
 
@@ -114,9 +116,9 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static')
+]
 
 LOGIN_REDIRECT_URL = 'home'
 LOGOUT_REDIRECT_URL = 'home'
-
-django_heroku.settings(locals())
